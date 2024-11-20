@@ -17,6 +17,14 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+// generate api key
+app.post('/generate-api-key', (req, res) => {
+    const newApiKey = uuidv4()
+    res.status(200).json({
+        apiKey: newApiKey
+    })
+})
+
 app.listen(port, () => {
     console.log(`Server running on port ${address}${port}`);
 });
