@@ -4,7 +4,7 @@ const SALT = 10;
 const userRepository = require('../repositories/userRepository');
 const ApplicationError = require('../../config/errors/ApplicationError');
 
-const JWT_SECRET_KEYY = "KTIJAWARA";
+const JWT_SECRET_KEYY = "3TERLUN4";
 const TOKEN_EXPIRATION = '1h'; // Token valid selama 1 jam
 
 const encryptedPassword = async (password) => {
