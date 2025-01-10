@@ -5,7 +5,7 @@ const userRepository = require('../repositories/userRepository');
 const ApplicationError = require('../../config/errors/ApplicationError');
 
 const JWT_SECRET_KEYY = "KTIJAWARA";
-const TOKEN_EXPIRATION = '1h'; // Token valid selama 1 jam
+const TOKEN_EXPIRATION = '10h'; // Token valid selama 1 jam
 
 const encryptedPassword = async (password) => {
     try {

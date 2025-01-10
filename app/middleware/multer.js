@@ -3,7 +3,7 @@ const path = require('path');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        let folder = 'uploads/others'; // Default folder
+        let folder = 'uploads/others';
 
         if (req.baseUrl.includes('news')) {
             folder = 'uploads/news';
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
         cb(null, folder);
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Nama file unik
+        cb(null, Date.now() + path.extname(file.originalname)); 
     }
 });
 
