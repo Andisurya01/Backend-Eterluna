@@ -9,6 +9,8 @@ const storage = multer.diskStorage({
             folder = 'uploads/news';
         } else if (req.baseUrl.includes('talent')) {
             folder = 'uploads/talent';
+        } else if (req.baseUrl.includes('staff')) {
+            folder = 'uploads/staff';
         }
 
         cb(null, folder);
