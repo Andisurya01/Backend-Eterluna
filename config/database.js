@@ -1,11 +1,17 @@
 require('dotenv').config();
+const {
+    DB_USERNAME = "root",
+    DB_PASSWORD = null,
+    DB_NAME = "eterluna",
+    DB_HOST = "127.0.0.1"
+} = process.env;
 
 module.exports = {
     "development": {
-        "username": "root",
-        "password": null,
-        "database": "eterluna",
-        "host": "127.0.0.1",
+        "username": DB_USERNAME,
+        "password": DB_PASSWORD,
+        "database": DB_NAME,
+        "host": DB_HOST,
         "dialect": "mysql"
     },
     "test": {
