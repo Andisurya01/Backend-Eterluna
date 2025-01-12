@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const {
     DB_USERNAME = "root",
     DB_PASSWORD = null,
@@ -12,7 +13,9 @@ module.exports = {
         "password": DB_PASSWORD,
         "database": DB_NAME,
         "host": DB_HOST,
-        "dialect": "mysql"
+        "dialect": "mysql",
+        "dialectModule": require('mysql2'),
+        // dialectModule: require('mysql2'),
     },
     "test": {
         "username": "root",
