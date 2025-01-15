@@ -1,7 +1,7 @@
 const {FAQs} = require('../models');
 
 exports.getFaqs = async (offset, limit) => {
-    return await FAQs.findAll({ offset, limit, order: [['createdAt', 'DESC']] });
+    return await FAQs.findAll({ offset, limit, order: [['createdAt']] });
 }
 
 exports.getFaqById = async (id) => {

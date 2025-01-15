@@ -1,7 +1,7 @@
 const { Misi } = require('../models');
 
 exports.getMisis = async (offset, limit) => {
-    return await Misi.findAll({ offset, limit, order: [['createdAt', 'DESC']] });
+    return await Misi.findAll({ offset, limit, order: [['createdAt']] });
 }
 
 exports.getMisiById = async (id) => {

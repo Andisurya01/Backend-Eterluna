@@ -1,7 +1,7 @@
 const { News } = require('../models');
 
 exports.getNews = async (offset,limit) => {
-    return await News.findAll({offset, limit, order: [['createdAt', 'DESC']] });
+    return await News.findAll({offset, limit, order: [['createdAt']] });
 };
 
 exports.getNewsById = async (id) => {

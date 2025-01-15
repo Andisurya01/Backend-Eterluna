@@ -3,8 +3,6 @@ const misiRepository = require('../repositories/misiRepository');
 
 exports.getMisis = async (offset, limit) => {
     try {
-        console.log('services misi', offset, limit);
-        
         const data = await misiRepository.getMisis(offset, limit);
         return data;
     } catch (error) {

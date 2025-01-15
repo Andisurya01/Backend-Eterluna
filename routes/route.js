@@ -11,6 +11,7 @@ const informasiPendaftaran = require('../app/api/informasiPendaftaranApi');
 const faqs = require('../app/api/faqsApi');
 // const talent = require('../app/api/talentApi');
 const staff = require('../app/api/staffApi');
+const carousel = require('../app/api/carouselApi');
 
 router.use('/auth', auth);
 router.use('/news', news);
@@ -22,5 +23,6 @@ router.use('/informasi-pendaftaran', informasiPendaftaran);
 router.use('/faqs', faqs);
 // router.use('/talent', talent);
 router.use('/staff', staff);
+router.use('/carousel', carousel);
 
 module.exports = router; 
