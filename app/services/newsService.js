@@ -31,6 +31,20 @@ exports.createNews = async (payload, idUser) => {
 
 exports.updateNews = async (id, payload, idUser) => {
     try {
+        const news = await newsRepository.getNewsById(id);
+        if (!news) {
+            throw new ApplicationError(`News with id ${id} not found`, 404);
+        }
+
+        if (payload.image) {
+            const oldImagePath = path.join(__dirname, '../../uploads/news', news.image);
+
+            if (fs.existsSync(oldImagePath)) {
+                fs.unlinkSync(oldImagePath); // Hapus file lama
+                console.log(`Old image deleted: ${oldImagePath}`);
+            }
+        }
+
         const data = await newsRepository.updateNews(id, payload, idUser);
         return data;
     } catch (error) {

@@ -40,18 +40,10 @@ exports.updateCarousel = async (id, payload) => {
         console.log('payload di sini', payload);
 
         if (payload.image) {
-            console.log("tahap pertama, cek image bawaan : ", carousel.image);
-            console.log("tahap pertama, cek image baru : ", payload.image);
-            console.log(__dirname);
-
-
             const oldImagePath = path.join(__dirname, '../../uploads/carousel', carousel.image);
-            console.log("tahap kedua, cek path image : ", oldImagePath);
 
             try {
                 const fileExists = fs.existsSync(oldImagePath);
-                console.log("Apakah file lama ada? ", fileExists); // Tambahkan log ini untuk cek file ada atau tidak
-
                 if (fileExists) {
                     fs.unlinkSync(oldImagePath); // Hapus file lama
                     console.log(`Old image deleted: ${oldImagePath}`);

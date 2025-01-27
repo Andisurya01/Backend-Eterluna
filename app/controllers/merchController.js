@@ -1,97 +1,90 @@
-const newsService = require('../services/newsService');
+const merchService = require('../services/merchService');
 
-exports.getNews = async (req, res) => {
+exports.getMerchs = async (req, res) => {
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
-        const offset = (page - 1) * limit;
-        const data = await newsService.getNews(offset, limit);
+        const data = await merchService.getMerchs();
         res.status(200).json({
-            status: 'SUCCESS GET ALL NEWS',
+            status: 'SUCCESS GET ALL MERCH',
             data,
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
-            status: 'FAILED GET ALL NEWS',
+            status: 'FAILED GET ALL MERCH',
             message: error.message,
         });
     }
 }
 
-exports.getNewsById = async (req, res) => {
+exports.getMerchById = async (req, res) => {
     try {
         const { id } = req.params;
-        const data = await newsService.getNewsById(id);
+        const data = await merchService.getMerchById(id);
         res.status(200).json({
-            status: 'SUCCESS GET NEWS BY ID',
+            status: 'SUCCESS GET MERCH BY ID',
             data,
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
-            status: 'FAILED GET NEWS BY ID',
+            status: 'FAILED GET MERCH BY ID',
             message: error.message,
         });
     }
 }
 
-exports.createNews = async (req, res) => {
+exports.createMerch = async (req, res) => {
     try {
-        const { id } = req.user;
         const payload = req.body;
         const file = req.file;
         console.log('file', file);
 
-
         if (file) {
             payload.image = file.filename;
         }
-
-        const data = await newsService.createNews(payload, id);
-
+        const data = await merchService.createMerch(payload);
         res.status(201).json({
-            status: 'SUCCESS CREATE NEWS',
+            status: 'SUCCESS CREATE MERCH',
             data
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
-            status: 'FAILED CREATE NEWS',
+            status: 'FAILED CREATE MERCH',
             message: error.message,
         });
     }
 }
 
-exports.updateNews = async (req, res) => {
+exports.updateMerch = async (req, res) => {
     try {
         const { id } = req.params;
-        const { id: idUser } = req.user;
         const payload = req.body;
         const file = req.file;
 
         file === undefined ? payload.image = 0 : payload.image = file.filename;
-        const data = await newsService.updateNews(id, payload, idUser);
+
+        const data = await merchService.updateMerch(id, payload);
         res.status(200).json({
-            status: 'SUCCESS UPDATE NEWS',
-            data,
+            status: 'SUCCESS UPDATE MERCH',
+            data
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
-            status: 'FAILED UPDATE NEWS',
+            status: 'FAILED UPDATE MERCH',
             message: error.message,
         });
     }
 }
 
-exports.deleteNews = async (req, res) => {
+exports.deleteMerch = async (req, res) => {
     try {
         const { id } = req.params;
-        const data = await newsService.deleteNews(id);
+        const data = await merchService.deleteMerch(id);
         res.status(200).json({
-            status: 'SUCCESS DELETE NEWS',
+            status: 'SUCCESS DELETE MERCH',
             data,
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
-            status: 'FAILED DELETE NEWS',
+            status: 'FAILED DELETE MERCH',
             message: error.message,
         });
     }
