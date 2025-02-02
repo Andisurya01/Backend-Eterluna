@@ -1,3 +1,4 @@
+const { url } = require('inspector');
 const ApplicationError = require('../../config/errors/ApplicationError');
 const merchRepository = require('../repositories/merchRepository');
 
@@ -50,8 +51,9 @@ exports.updateMerch = async (id, payload) => {
         const updated = await merch.update({
             name: payload.name || merch.name,
             image: payload.image || merch.image,
-            price: payload.price || merch.price,
-            stock: payload.stock || merch.stock,
+            url: payload.url || merch.url,
+            bgColor: payload.bgColor || merch.bgColor,
+            textColor: payload.textColor || merch.textColor,
         });
         return updated;
     } catch (error) {

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'genId',
         as: 'gen'
       });
-
+      Talent.belongsToMany(models.Sosmed, { through: models.TalentSosmed , as: 'sosmeds' });
       // define association here
     }
   }
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     weight: {
       type: DataTypes.INTEGER,
-      allowNull : false
+      allowNull: false
     },
     gender: {
       type: DataTypes.ENUM('Woman', 'Man', 'Unknown'),

@@ -15,6 +15,7 @@ const carousel = require('../app/api/carouselApi');
 const sosmed = require('../app/api/sosmedApi');
 const merch = require('../app/api/merchApi');
 const gen = require('../app/api/genApi');
+const talentSosmed = require('../app/api/talentSosmedApi');
 
 router.use('/auth', auth);
 router.use('/news', news);
@@ -30,5 +31,6 @@ router.use('/carousel', carousel);
 router.use('/sosmed', sosmed);
 router.use('/merch', merch);
 router.use('/gen', gen);
+router.use('/talent-sosmed', talentSosmed);
 
 module.exports = router; 

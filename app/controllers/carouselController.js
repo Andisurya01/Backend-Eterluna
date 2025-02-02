@@ -58,7 +58,17 @@ exports.updateCarousel = async (req, res) => {
         const { id } = req.params;
         const payload = req.body;
         const file = req.file;
-
+        // if (files) {
+        //     if (files.background && files.background[0]) {
+        //         payload.background = files.background[0].filename;
+        //     }
+        //     if (files.logo && files.logo[0]) {
+        //         payload.logo = files.logo[0].filename;
+        //     }
+        //     if (files.fullBody && files.fullBody[0]) {
+        //         payload.fullBody = files.fullBody[0].filename;
+        //     }
+        // }
         file === undefined ? payload.image = 0 : payload.image = file.filename;
 
         const data = await carouselService.updateCarousel(id, payload);

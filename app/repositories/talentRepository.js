@@ -1,4 +1,4 @@
-const { Talent, Gen } = require('../models');
+const { Talent, Gen, Sosmed } = require('../models');
 
 exports.getTalents = async () => {
     return await Talent.findAll({
@@ -8,12 +8,34 @@ exports.getTalents = async () => {
                 as: 'gen',
                 // attributes: ['id', 'name'],
             },
-        ]}
+            {
+                model: Sosmed,
+                as: 'sosmeds',
+                through: { attributes: ['url'] },
+                // attributes: ['id', 'name'],
+            }
+        ]
+    }
     );
 }
 
 exports.getTalentById = async (id) => {
-    return await Talent.findByPk(id);
+    return await Talent.findByPk(
+        id, {
+        include: [
+            {
+                model: Gen,
+                as: 'gen',
+                // attributes: ['id', 'name'],
+            },
+            {
+                model: Sosmed,
+                as: 'sosmeds',
+                through: { attributes: ['url'] },
+                // attributes: ['id', 'name'],
+            }
+        ]
+    });
 }
 
 exports.createTalent = async (payload) => {
@@ -26,6 +48,18 @@ exports.updateTalent = async (id, payload) => {
     });
 }
 
+exports.changeGenTalent = async (id, payload) => {
+    return await Talent.update({ genId: payload }, { where: { id } });
+}
+
 exports.deleteTalent = async (id) => {
     return await Talent.destroy({ where: { id } });
 };
+
+exports.changeStatusTalent = async (id, payload) => {
+    return await Talent.update({ status: 'payload' }, { where: { id } });
+};
+
+exports.debutTalent = async (id) => {
+    return await Talent.update({ debut: true }, { where: { id } });
+}

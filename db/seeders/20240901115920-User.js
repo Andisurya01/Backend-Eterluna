@@ -13,6 +13,9 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      // {
+      //   name
+      // }
     ]);
     /**
      * Add seed commands here.

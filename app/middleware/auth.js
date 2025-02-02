@@ -1,5 +1,4 @@
 const authServices = require("../services/authService");
-const ApplicationError = require("../../config/errors/ApplicationError");
 
 
 exports.authorize = async (req, res, next) => {

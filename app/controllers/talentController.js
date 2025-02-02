@@ -65,13 +65,8 @@ exports.updateTalent = async (req, res) => {
     try {
         const { id } = req.params;
         const payload = req.body;
-        const file = req.file;
-        console.log
-
-        if (file) {
-            payload.image = file.filename;
-        }
-        const data = await talentService.updateTalent(id, payload);
+        const files = req.files;
+        const data = await talentService.updateTalent(id, payload, files);
         res.status(200).json({
             status: 'SUCCESS UPDATE TALENT',
             data,
@@ -80,6 +75,55 @@ exports.updateTalent = async (req, res) => {
     catch (error) {
         res.status(error.statusCode || 500).json({
             status: 'FAILED UPDATE TALENT',
+            message: error.message,
+        });
+    }
+}
+
+exports.changeGenTalent = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { genId } = req.body;
+        const data = await talentService.changeGenTalent(id, genId);
+        res.status(200).json({
+            status: 'SUCCESS CHANGE GEN TALENT',
+            data,
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            status: 'FAILED CHANGE GEN TALENT',
+            message: error.message,
+        });
+    }
+}
+
+exports.changeStatusTalent = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await talentService.changeStatusTalent(id);
+        res.status(200).json({
+            status: 'SUCCESS CHANGE STATUS TALENT',
+            data,
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            status: 'FAILED CHANGE STATUS TALENT',
+            message: error.message,
+        });
+    }
+}
+
+exports.debutTalent = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await talentService.debutTalent(id);
+        res.status(200).json({
+            status: 'SUCCESS DEBUT TALENT',
+            data,
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            status: 'FAILED DEBUT TALENT',
             message: error.message,
         });
     }
