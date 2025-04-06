@@ -13,6 +13,23 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        name: 'Bapack Hadezz',
+        email: 'radensatrionotonegoro@gmail.com',
+        role: 'SUPERADMIN',
+        password: bcrypt.hashSync('BapackHadezz123', 10),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'maria',
+        email: 'keitimumaria@gmail.com',
+        role: 'SUPERADMIN',
+        password: bcrypt.hashSync('Admin12345*', 10),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
+
       // {
       //   name
       // }

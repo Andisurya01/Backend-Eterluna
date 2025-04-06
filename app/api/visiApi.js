@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const visiController = require('../controllers/visiController');
 const { authorize } = require('../middleware/auth');
+const { permissionCheck } = require('../middleware/permissonCheck');
 
 router
     .get('/', visiController.getVisis)
     .get('/:id', visiController.getVisiById)
-    .post('/', authorize, visiController.createVisi)
-    .put('/:id', authorize, visiController.updateVisi)
-    .put('/', authorize, visiController.bulkUpdateVisi)
-    .delete('/:id', authorize, visiController.deleteVisi);
+    .post('/', authorize, permissionCheck({target : "others"}), visiController.createVisi)
+    .put('/:id', authorize, permissionCheck({target : "others"}), visiController.updateVisi)
+    .put('/', authorize, permissionCheck({target : "others"}), visiController.bulkUpdateVisi)
+    .delete('/:id', authorize, permissionCheck({target : "others"}), visiController.deleteVisi);
 
 module.exports = router;

@@ -1,7 +1,16 @@
-const { Staff } = require('../models');
+const { Staff, Sosmed } = require('../models');
 
 exports.getStaffs = async () => {
-    return await Staff.findAll();
+    return await Staff.findAll({
+        include: [
+            {
+                model: Sosmed,
+                as: 'sosmeds',
+                through: { attributes: ['url'] },
+                // attributes: ['id', 'name'],
+            }
+        ]
+    });
 }
 
 exports.getStaffById = async (id) => {

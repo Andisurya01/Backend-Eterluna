@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Talent.belongsTo(models.Gen, {
         foreignKey: 'genId',
-        as: 'gen'
+        as: 'gen',
+        onDelete: 'CASCADE'
       });
       Talent.belongsToMany(models.Sosmed, { through: models.TalentSosmed , as: 'sosmeds' });
       // define association here

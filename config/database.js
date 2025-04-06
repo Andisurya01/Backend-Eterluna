@@ -15,7 +15,6 @@ module.exports = {
         "host": DB_HOST,
         "dialect": "mysql",
         "dialectModule": require('mysql2'),
-        // dialectModule: require('mysql2'),
     },
     "test": {
         "username": "root",

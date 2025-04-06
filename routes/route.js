@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();  
 
 const auth = require('../app/api/authApi');
+const user = require('../app/api/userApi');
 const news = require('../app/api/newsApi');
 const misi = require('../app/api/misiApi');
 const about = require('../app/api/aboutApi');
@@ -16,8 +17,11 @@ const sosmed = require('../app/api/sosmedApi');
 const merch = require('../app/api/merchApi');
 const gen = require('../app/api/genApi');
 const talentSosmed = require('../app/api/talentSosmedApi');
+const staffSosmed = require('../app/api/staffSosmedApi');
+const permission = require('../app/api/permissionApi');
 
 router.use('/auth', auth);
+router.use('/user', user);
 router.use('/news', news);
 router.use('/misi', misi);
 router.use('/about', about);
@@ -32,5 +36,7 @@ router.use('/sosmed', sosmed);
 router.use('/merch', merch);
 router.use('/gen', gen);
 router.use('/talent-sosmed', talentSosmed);
+router.use('/staff-sosmed', staffSosmed);
+router.use('/permission', permission);
 
 module.exports = router; 

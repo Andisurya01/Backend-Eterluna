@@ -62,12 +62,21 @@ exports.createNews = async (req, res) => {
 
 exports.updateNews = async (req, res) => {
     try {
+        
         const { id } = req.params;
-        const { id: idUser } = req.user;
+        const { id : idUser } = req.user;
         const payload = req.body;
         const file = req.file;
 
+        console.log({
+            id,
+            idUser,
+            payload,
+            file
+        });
+
         file === undefined ? payload.image = 0 : payload.image = file.filename;
+        
         const data = await newsService.updateNews(id, payload, idUser);
         res.status(200).json({
             status: 'SUCCESS UPDATE NEWS',

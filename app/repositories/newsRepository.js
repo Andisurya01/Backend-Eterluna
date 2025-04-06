@@ -1,11 +1,23 @@
 const { News } = require('../models');
+const convertToIndonesiaTime = require('../util/convertTime');
 
-exports.getNews = async (offset,limit) => {
-    return await News.findAll({offset, limit, order: [['createdAt' , "DESC"]] });
+exports.getNews = async (offset, limit) => {
+    const newsData = await News.findAll({ offset, limit, order: [['createdAt', "DESC"]] });
+    return newsData.map((news) => ({
+        ...news.toJSON(),
+        createdAt: convertToIndonesiaTime(news.createdAt),
+        updatedAt: convertToIndonesiaTime(news.updatedAt),
+    }));
+
 };
 
 exports.getNewsById = async (id) => {
-    return await News.findByPk(id);
+    const news  = await News.findByPk(id);
+    return {
+        ...news.toJSON(),
+        createdAt: convertToIndonesiaTime(news.createdAt),
+        updatedAt: convertToIndonesiaTime(news.updatedAt),
+    };
 }
 
 exports.createNews = async (payload, idUser) => {

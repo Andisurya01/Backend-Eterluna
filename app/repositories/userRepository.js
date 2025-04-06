@@ -1,11 +1,26 @@
-const { User } = require('../models');
+const { User, AdminPermissions } = require('../models');
 
 exports.getUsers = async () => {    
-    return await User.findAll();
+    return await User.findAll({
+        include: [
+            {
+                model: AdminPermissions,
+                as: 'permissions',
+            },
+        ],
+    });
 };
 
 exports.getUserById = async (id) => {
-    return await User.findByPk(id);
+    return await User.findByPk(id,
+        {
+            include: [
+                {
+                    model: AdminPermissions,
+                    as: 'permissions',
+                },
+            ],
+        });
 };
 
 exports.getUserByEmail = async (email) => {
@@ -18,4 +33,8 @@ exports.createUser = async (payload) => {
 
 exports.deleteUser = async (id) => {
     return await User.destroy({ where: { id } });
+};
+
+exports.updateUser = async (id, payload) => {
+    return await User.update(payload, { where: { id } });
 };
