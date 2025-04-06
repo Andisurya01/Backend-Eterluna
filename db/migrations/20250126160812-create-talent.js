@@ -53,18 +53,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      background: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      logo: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      fullBody: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       status: {
         type: Sequelize.ENUM('ACTIVE', 'INACTIVE'),
         defaultValue: 'INACTIVE',

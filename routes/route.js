@@ -19,6 +19,8 @@ const gen = require('../app/api/genApi');
 const talentSosmed = require('../app/api/talentSosmedApi');
 const staffSosmed = require('../app/api/staffSosmedApi');
 const permission = require('../app/api/permissionApi');
+const modelTalent = require('../app/api/modelTalentApi');
+const creator = require('../app/api/creatorApi');
 
 router.use('/auth', auth);
 router.use('/user', user);
@@ -38,5 +40,7 @@ router.use('/gen', gen);
 router.use('/talent-sosmed', talentSosmed);
 router.use('/staff-sosmed', staffSosmed);
 router.use('/permission', permission);
+router.use('/model-talent', modelTalent);
+router.use('/creator', creator);
 
 module.exports = router; 

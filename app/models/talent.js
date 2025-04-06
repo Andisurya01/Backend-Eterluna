@@ -4,19 +4,21 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Talent extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       Talent.belongsTo(models.Gen, {
         foreignKey: 'genId',
         as: 'gen',
         onDelete: 'CASCADE'
       });
-      Talent.belongsToMany(models.Sosmed, { through: models.TalentSosmed , as: 'sosmeds' });
-      // define association here
+      Talent.belongsToMany(models.Sosmed, { 
+        through: models.TalentSosmed, 
+        as: 'sosmeds' 
+      });
+      Talent.hasMany(models.ModelTalent, {
+        foreignKey: 'talentId',
+        as: 'models',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Talent.init({
@@ -62,18 +64,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     bgColor: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    background: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    logo: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    fullBody: {
       type: DataTypes.STRING,
       allowNull: false
     },

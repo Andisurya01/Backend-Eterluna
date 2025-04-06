@@ -1,4 +1,4 @@
-const { Talent, Gen, Sosmed } = require('../models');
+const { Talent, Gen, Sosmed, ModelTalent, Creator } = require('../models');
 
 exports.getTalents = async () => {
     return await Talent.findAll({
@@ -12,6 +12,18 @@ exports.getTalents = async () => {
                 model: Sosmed,
                 as: 'sosmeds',
                 through: { attributes: ['url'] },
+                // attributes: ['id', 'name'],
+            },
+            {
+                model: ModelTalent,
+                as: 'models',
+                include: [
+                    {
+                        model: Creator,
+                        as: 'creators',
+                        // attributes: ['id', 'name'],
+                    }
+                ]
                 // attributes: ['id', 'name'],
             }
         ]
