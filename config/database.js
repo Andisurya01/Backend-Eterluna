@@ -1,10 +1,12 @@
 require('dotenv').config();
 
 const {
-    DB_USERNAME = "root",
-    DB_PASSWORD = null,
-    DB_NAME = "eterluna",
-    DB_HOST = "127.0.0.1"
+    DB_USERNAME,
+    DB_PASSWORD,
+    DB_NAME,
+    DB_HOST,
+    DB_PORT,
+    DB_DIALECT = "mysql",
 } = process.env;
 
 module.exports = {
@@ -13,8 +15,9 @@ module.exports = {
         "password": DB_PASSWORD,
         "database": DB_NAME,
         "host": DB_HOST,
-        "dialect": "mysql",
+        "dialect": DB_DIALECT,
         "dialectModule": require('mysql2'),
+        "port": Number(DB_PORT),
     },
     "test": {
         "username": "root",
