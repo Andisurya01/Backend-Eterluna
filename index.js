@@ -8,7 +8,7 @@ const routes = require('./routes/route');
 const db = require('./app/models/index.js'); // ini akan mengakses models/index.js
 
 app.use(cors({
-  origin: '*',  // Mengizinkan semua asal (origin)
+  origin: ['https://admin-eter-luna.vercel.app', 'https://eterluna.vercel.app'],  // Ganti dengan URL frontend Anda
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Mengizinkan metode yang umum digunakan
   allowedHeaders: ['Content-Type', 'Authorization'],  // Header yang diizinkan
 }));
