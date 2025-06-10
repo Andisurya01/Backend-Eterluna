@@ -15,6 +15,23 @@ exports.getTalents = async (req, res) => {
     }
 }
 
+exports.getTalentWhereTalentNameIsEterluna = async (req, res) => {
+    try {
+        console.log('getTalentWhereTalentNameIsEterluna');
+        
+        const data = await talentService.getTalentWhereTalentNameIsEterluna();
+        res.status(200).json({
+            status: 'SUCCESS GET TALENT WHERE NAME IS ETERLUNA',
+            data,
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            status: 'FAILED GET TALENT WHERE NAME IS ETERLUNA',
+            message: error.message,
+        });
+    }
+}
+
 exports.getTalentById = async (req, res) => {
     try {
         const { id } = req.params;

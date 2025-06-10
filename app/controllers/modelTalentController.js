@@ -34,6 +34,8 @@ exports.getModelTalentById = async (req, res) => {
 exports.createModelTalent = async (req, res) => {
     try {
         const payload = req.body;
+        console.log('payload', payload);
+        
         const files = req.files;
         console.log('files', files);
         
@@ -48,6 +50,7 @@ exports.createModelTalent = async (req, res) => {
                 payload.fullBody = files.fullBody[0].filename;
             }
         }
+        console.log('payload after', payload);
         const data = await modelTalentService.createModelTalent(payload);
         res.status(201).json({
             status: 'SUCCESS CREATE MODEL TALENT',

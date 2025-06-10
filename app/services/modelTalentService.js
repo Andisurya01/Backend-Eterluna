@@ -22,6 +22,8 @@ exports.getModelTalentById = async (id) => {
 exports.createModelTalent = async (payload) => {
     try {
         const data = await modelTalentRepository.createModelTalent(payload);
+        console.log('data', data);
+        
         return data;
     } catch (error) {
         throw new ApplicationError(`Error at services modelTalent : ${error.message}`, 500);

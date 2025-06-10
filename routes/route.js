@@ -21,6 +21,8 @@ const staffSosmed = require('../app/api/staffSosmedApi');
 const permission = require('../app/api/permissionApi');
 const modelTalent = require('../app/api/modelTalentApi');
 const creator = require('../app/api/creatorApi');
+const privacyPolicy = require('../app/api/privacyPolicyApi');
+const auditonLinkForm = require('../app/api/auditonLinkFormApi');
 
 router.use('/auth', auth);
 router.use('/user', user);
@@ -42,5 +44,7 @@ router.use('/staff-sosmed', staffSosmed);
 router.use('/permission', permission);
 router.use('/model-talent', modelTalent);
 router.use('/creator', creator);
+router.use('/privacy-policy', privacyPolicy);
+router.use('/audition-link-form', auditonLinkForm);
 
 module.exports = router; 

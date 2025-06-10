@@ -1,7 +1,69 @@
 const { Talent, Gen, Sosmed, ModelTalent, Creator } = require('../models');
+const { Op } = require('sequelize');
 
 exports.getTalents = async () => {
     return await Talent.findAll({
+        // where: {
+        //     name: {
+        //         [Op.ne]: 'eterluna'  // name !== 'eterluna'
+        //     }
+        // },
+        include: [
+            {
+                model: Gen,
+                as: 'gen',
+            },
+            {
+                model: Sosmed,
+                as: 'sosmeds',
+                through: { attributes: ['url'] },
+            },
+            {
+                model: ModelTalent,
+                as: 'models',
+                include: [
+                    {
+                        model: Creator,
+                        as: 'creators',
+                    }
+                ]
+            }
+        ]
+    });
+}
+
+exports.getTalentWhereTalentNameIsEterluna = async () => {
+    return await Talent.findAll({
+        where: {
+            name: 'eterluna'  // name === 'eterluna'
+        },
+        include: [
+            {
+                model: Gen,
+                as: 'gen',
+            },
+            {
+                model: Sosmed,
+                as: 'sosmeds',
+                through: { attributes: ['url'] },
+            },
+            {
+                model: ModelTalent,
+                as: 'models',
+                include: [
+                    {
+                        model: Creator,
+                        as: 'creators',
+                    }
+                ]
+            }
+        ]
+    });
+}
+
+exports.getTalentById = async (id) => {
+    return await Talent.findByPk(
+        id, {
         include: [
             {
                 model: Gen,
@@ -24,26 +86,6 @@ exports.getTalents = async () => {
                         // attributes: ['id', 'name'],
                     }
                 ]
-                // attributes: ['id', 'name'],
-            }
-        ]
-    }
-    );
-}
-
-exports.getTalentById = async (id) => {
-    return await Talent.findByPk(
-        id, {
-        include: [
-            {
-                model: Gen,
-                as: 'gen',
-                // attributes: ['id', 'name'],
-            },
-            {
-                model: Sosmed,
-                as: 'sosmeds',
-                through: { attributes: ['url'] },
                 // attributes: ['id', 'name'],
             }
         ]

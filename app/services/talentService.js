@@ -13,6 +13,15 @@ exports.getTalents = async () => {
     }
 }
 
+exports.getTalentWhereTalentNameIsEterluna = async () => {
+    try {
+        const data = await talentRepository.getTalentWhereTalentNameIsEterluna();
+        return data;
+    } catch (error) {
+        throw new ApplicationError(`Error at services talent : ${error.message}`, 500);
+    }
+}
+
 exports.getTalentById = async (id) => {
     try {
         const data = await talentRepository.getTalentById(id);

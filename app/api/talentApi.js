@@ -8,6 +8,7 @@ const { permissionCheck } = require('../middleware/permissonCheck');
 router
     .get('/', talentController.getTalents)
     .get('/:id', talentController.getTalentById)
+    .get('/name/eterluna', talentController.getTalentWhereTalentNameIsEterluna)
     .post('/', authorize, permissionCheck({target : "talent"}), upload.fields([{ name: 'background', maxCount: 1 }, { name: 'logo', maxCount: 1 },{ name: 'fullBody', maxCount: 1 }]), talentController.createTalent)
     .put('/:id', authorize, permissionCheck({target : "talent"}), upload.fields([{ name: 'background', maxCount: 1 }, { name: 'logo', maxCount: 1 }, { name: 'fullBody', maxCount: 1 }]), talentController.updateTalent)
     .put('/status/:id', authorize, permissionCheck({target : "talent"}), talentController.changeStatusTalent)
