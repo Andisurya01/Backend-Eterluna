@@ -7,11 +7,24 @@ const port = 3307;
 const routes = require('./routes/route');
 const db = require('./app/models/index.js'); // ini akan mengakses models/index.js
 
+const allowedOrigins = [
+  'https://admin-eter-luna.vercel.app',
+  'https://eterluna.vercel.app',
+  'http://localhost:3000',        // untuk Postman desktop / frontend lokal
+  'http://127.0.0.1:3000',        // alternatif
+];
+
 app.use(cors({
-  origin: '*',  // Mengizinkan semua asal (origin)
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Mengizinkan metode yang umum digunakan
-  allowedHeaders: ['Content-Type', 'Authorization'],  // Header yang diizinkan
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 }));
+app.options('*', cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/', routes);
