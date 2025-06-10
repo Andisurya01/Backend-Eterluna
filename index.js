@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 3307;
+const port = 3000;
 
 const routes = require('./routes/route');
 const db = require('./app/models/index.js'); // ini akan mengakses models/index.js
