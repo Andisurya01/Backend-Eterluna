@@ -11,8 +11,10 @@ const db = require('./app/models/index.js'); // ini akan mengakses models/index.
 const allowedOrigins = [
   'https://admin-eter-luna.vercel.app',
   'https://eterluna.vercel.app',
-  'http://localhost:3000',        // untuk Postman desktop / frontend lokal
-  'http://127.0.0.1:3000',        // alternatif
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  'http://localhost:5173',
+  'http://localhost:5174',
 ];
 
 app.use(cors({
