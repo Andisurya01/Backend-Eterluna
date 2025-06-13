@@ -7,6 +7,7 @@ const port = Number(process.env.DB_PORT || 55954);
 const routes = require('./routes/route');
 const db = require('./app/models/index.js'); // ini akan mengakses models/index.js
 
+
 const allowedOrigins = [
   'https://admin-eter-luna.vercel.app',
   'https://eterluna.vercel.app',
@@ -15,13 +16,8 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
 app.options('*', cors());
