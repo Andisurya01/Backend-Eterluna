@@ -8,20 +8,29 @@ const routes = require('./routes/route');
 const db = require('./app/models/index.js'); // ini akan mengakses models/index.js
 
 
-const allowedOrigins = [
-  'https://admin-eter-luna.vercel.app',
-  'https://eterluna.vercel.app',
-  'http://localhost:3000',
-  'http://127.0.0.1:3000',
-  'http://localhost:5173',
-  'http://localhost:5174',
-];
+app.use((req, res, next) => {
+  console.log('Incoming Origin:', req.headers.origin);
+  console.log('Method:', req.method);
+  const allowedOrigins = [
+    'https://admin-eter-luna.vercel.app',
+    'https://eterluna.vercel.app',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  }
 
-app.use(cors({
-  origin: allowedOrigins,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true,
-}));
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
 app.options('*', cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
