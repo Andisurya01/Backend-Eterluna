@@ -9,9 +9,6 @@ const db = require('./app/models/index.js'); // ini akan mengakses models/index.
 const fs = require('fs');
 const path = require('path');
 
-const fs = require('fs');
-const path = require('path');
-
 function logFolderStructure(dirPath, indent = '') {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
 
