@@ -8,6 +8,13 @@ const routes = require('./routes/route');
 const db = require('./app/models/index.js'); // ini akan mengakses models/index.js
 
 app.use(cors({
+  AccessControlAllowOrigin: [
+    'https://admin-eter-luna.vercel.app',
+    'https://eterluna.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'http://localhost:5174',
+  ],
   origin: [
     'https://admin-eter-luna.vercel.app',
     'https://eterluna.vercel.app',
