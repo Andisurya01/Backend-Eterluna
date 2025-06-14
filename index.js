@@ -10,6 +10,8 @@ const db = require('./app/models/index.js'); // ini akan mengakses models/index.
 app.use(cors({
   AccessControlAllowOrigin: [
     'https://admin-eter-luna.vercel.app',
+    'https://admineterluna-production.up.railway.app/',
+    'https://eterluna-production.up.railway.app/about',
     'https://eterluna.vercel.app',
     'http://localhost:3000',
     'http://localhost:5173',
@@ -18,6 +20,8 @@ app.use(cors({
   origin: [
     'https://admin-eter-luna.vercel.app',
     'https://eterluna.vercel.app',
+    'https://admineterluna-production.up.railway.app/',
+    'https://eterluna-production.up.railway.app/about',
     'http://localhost:3000',
     'http://localhost:5173',
     'http://localhost:5174',
