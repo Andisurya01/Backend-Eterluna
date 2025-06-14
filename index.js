@@ -6,6 +6,20 @@ const port = Number(process.env.DB_PORT || 55954);
 
 const routes = require('./routes/route');
 const db = require('./app/models/index.js'); // ini akan mengakses models/index.js
+const fs = require('fs');
+const path = require('path');
+
+function logFolderStructure(basePath, depth = 0) {
+  const files = fs.readdirSync(basePath);
+  for (const file of files) {
+    const fullPath = path.join(basePath, file);
+    const isDir = fs.lstatSync(fullPath).isDirectory();
+    console.log(`${' '.repeat(depth * 2)}- ${file}${isDir ? '/' : ''}`);
+    if (isDir) logFolderStructure(fullPath, depth + 1);
+  }
+}
+
+logFolderStructure(__dirname);
 
 app.use(cors({
   AccessControlAllowOrigin: [
