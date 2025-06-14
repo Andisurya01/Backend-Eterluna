@@ -9,17 +9,30 @@ const db = require('./app/models/index.js'); // ini akan mengakses models/index.
 const fs = require('fs');
 const path = require('path');
 
-function logFolderStructure(basePath, depth = 0) {
-  const files = fs.readdirSync(basePath);
-  for (const file of files) {
-    const fullPath = path.join(basePath, file);
-    const isDir = fs.lstatSync(fullPath).isDirectory();
-    console.log(`${' '.repeat(depth * 2)}- ${file}${isDir ? '/' : ''}`);
-    if (isDir) logFolderStructure(fullPath, depth + 1);
+const fs = require('fs');
+const path = require('path');
+
+function logFolderStructure(dirPath, indent = '') {
+  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+
+  for (const entry of entries) {
+    // Lewati node_modules dan folder tersembunyi
+    if (entry.name === 'node_modules' || entry.name.startsWith('.')) continue;
+
+    const fullPath = path.join(dirPath, entry.name);
+
+    if (entry.isDirectory()) {
+      console.log(`${indent}📁 ${entry.name}`);
+      logFolderStructure(fullPath, indent + '  ');
+    } else {
+      console.log(`${indent}📄 ${entry.name}`);
+    }
   }
 }
 
+// Jalankan dari root project
 logFolderStructure(__dirname);
+
 
 app.use(cors({
   AccessControlAllowOrigin: [
