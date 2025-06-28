@@ -35,8 +35,8 @@ module.exports = {
           model: 'Talents',
           key: 'id'
         },
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -45,7 +45,11 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      profilePicture: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
     });
   },
   async down(queryInterface, Sequelize) {

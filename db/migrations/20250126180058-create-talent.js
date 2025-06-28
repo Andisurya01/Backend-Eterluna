@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      language :{
+      language: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -58,7 +58,7 @@ module.exports = {
         defaultValue: 'INACTIVE',
         allowNull: false
       },
-      debut:{
+      debut: {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
@@ -72,8 +72,22 @@ module.exports = {
       },
       genId: {
         type: Sequelize.INTEGER,
-        allowNull: false
-      }
+        allowNull: true,
+        references: {
+          model: 'Gens',
+          key: 'id'
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'SET NULL'
+      },
+      badge: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      linkYT: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
     });
   },
   async down(queryInterface, Sequelize) {

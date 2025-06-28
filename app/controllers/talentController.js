@@ -51,21 +51,13 @@ exports.getTalentById = async (req, res) => {
 exports.createTalent = async (req, res) => {
     try {
         const payload = req.body;
+        const data = await talentService.createTalent(payload);
         const files = req.files;
-        console.log('files', files);
-        
         if (files) {
-            if (files.background && files.background[0]) {
-                payload.background = files.background[0].filename;
-            }
-            if (files.logo && files.logo[0]) {
-                payload.logo = files.logo[0].filename;
-            }
-            if (files.fullBody && files.fullBody[0]) {
-                payload.fullBody = files.fullBody[0].filename;
+            if (files.badge && files.badge[0]) {
+                data.badge = files.badge[0].filename;
             }
         }
-        const data = await talentService.createTalent(payload);
         res.status(201).json({
             status: 'SUCCESS CREATE TALENT',
             data
@@ -82,6 +74,8 @@ exports.updateTalent = async (req, res) => {
     try {
         const { id } = req.params;
         const payload = req.body;
+        console.log('yt link', payload.linkYT);
+        
         const files = req.files;
         const data = await talentService.updateTalent(id, payload, files);
         res.status(200).json({

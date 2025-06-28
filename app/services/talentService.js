@@ -35,7 +35,7 @@ exports.createTalent = async (payload) => {
     try {
         const data = await talentRepository.createTalent(payload);
         console.log('data', data);
-        
+
         return data;
     } catch (error) {
         throw new ApplicationError(`Error at services talent : ${error.message}`, 500);
@@ -50,81 +50,31 @@ exports.updateTalent = async (id, payload, files) => {
         }
 
         if (files) {
-            if (files.background && files.background[0]) {
-                payload.background = files.background[0].filename;
-            }
-            if (files.logo && files.logo[0]) {
-                payload.logo = files.logo[0].filename;
-            }
-            if (files.fullBody && files.fullBody[0]) {
-                payload.fullBody = files.fullBody[0].filename;
+            if (files.badge && files.badge[0]) {
+                payload.badge = files.badge[0].filename;
             }
         }
+        console.log('payload after', payload);
+        console.log(talent.badge);
 
-        if (payload.background) {
-            const oldImagePath = path.join(__dirname, '../../uploads/talent', talent.background);
+        if (payload.badge) {
+            if (talent.badge !== null) {
+                const oldImagePath = path.join(__dirname, '../../uploads/talent/badge', talent.badge);
+                console.log(`Old image path: ${oldImagePath}`);
 
-            try {
-                const fileExists = fs.existsSync(oldImagePath);
-                if (fileExists) {
-                    fs.unlinkSync(oldImagePath);
-                    console.log(`Old image deleted: ${oldImagePath}`);
-                } else {
-                    console.log(`File not found: ${oldImagePath}`);
+                try {
+                    const fileExists = fs.existsSync(oldImagePath);
+                    if (fileExists) {
+                        fs.unlinkSync(oldImagePath);
+                        console.log(`Old image deleted: ${oldImagePath}`);
+                    } else {
+                        console.log(`File not found: ${oldImagePath}`);
+                    }
+                } catch (error) {
+                    console.log("Error checking or deleting file: ", error);
                 }
-            } catch (error) {
-                console.log("Error checking or deleting file: ", error);
             }
         }
-
-        if (payload.logo) {
-            const oldImagePath = path.join(__dirname, '../../uploads/talent', talent.logo);
-
-            try {
-                const fileExists = fs.existsSync(oldImagePath);
-                if (fileExists) {
-                    fs.unlinkSync(oldImagePath);
-                    console.log(`Old image deleted: ${oldImagePath}`);
-                } else {
-                    console.log(`File not found: ${oldImagePath}`);
-                }
-            } catch (error) {
-                console.error("Error checking or deleting file: ", error);
-            }
-        }
-
-        if (payload.fullBody) {
-            const oldImagePath = path.join(__dirname, '../../uploads/talent', talent.fullBody);
-
-            try {
-                const fileExists = fs.existsSync(oldImagePath);
-                if (fileExists) {
-                    fs.unlinkSync(oldImagePath);
-                    console.log(`Old image deleted: ${oldImagePath}`);
-                } else {
-                    console.log(`File not found: ${oldImagePath}`);
-                }
-            } catch (error) {
-                console.error("Error checking or deleting file: ", error);
-            }
-        }
-
-
-        // if (payload.image) {
-        //     const oldImagePath = path.join(__dirname, '../../uploads/talent', talent.image);
-
-        //     try {
-        //         const fileExists = fs.existsSync(oldImagePath);
-        //         if (fileExists) {
-        //             fs.unlinkSync(oldImagePath);
-        //             console.log(`Old image deleted: ${oldImagePath}`);
-        //         } else {
-        //             console.log(`File not found: ${oldImagePath}`);
-        //         }
-        //     } catch (error) {
-        //         console.error("Error checking or deleting file: ", error);
-        //     }
-        // }
 
         const updated = await talent.update({
             name: payload.name || talent.name,
@@ -138,9 +88,8 @@ exports.updateTalent = async (id, payload, files) => {
             fanName: payload.fanName || talent.fanName,
             tag: payload.tag || talent.tag,
             bgColor: payload.bgColor || talent.bgColor,
-            background: payload.background || talent.background,
-            logo: payload.logo || talent.logo,
-            fullBody: payload.fullBody || talent.fullBody,
+            badge: payload.badge || talent.badge,
+            linkYT: payload.linkYT || talent.linkYT,
         });
 
         return updated;

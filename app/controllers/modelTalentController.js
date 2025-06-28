@@ -49,6 +49,9 @@ exports.createModelTalent = async (req, res) => {
             if (files.fullBody && files.fullBody[0]) {
                 payload.fullBody = files.fullBody[0].filename;
             }
+            if (files.profilePicture && files.profilePicture[0]) {
+                payload.profilePicture = files.profilePicture[0].filename;
+            }
         }
         console.log('payload after', payload);
         const data = await modelTalentService.createModelTalent(payload);
@@ -68,7 +71,25 @@ exports.updateModelTalent = async (req, res) => {
     try {
         const { id } = req.params;
         const payload = req.body;
-        const data = await modelTalentService.updateModelTalent(id, payload);
+        console.log('payload', payload);
+        
+        const files = req.files;
+        
+        if (files) {
+            if (files.background && files.background[0]) {
+                payload.background = files.background[0].filename;
+            }
+            if (files.logo && files.logo[0]) {
+                payload.logo = files.logo[0].filename;
+            }
+            if (files.fullBody && files.fullBody[0]) {
+                payload.fullBody = files.fullBody[0].filename;
+            }
+            if (files.profilePicture && files.profilePicture[0]) {
+                payload.profilePicture = files.profilePicture[0].filename;
+            }
+        }
+        const data = await modelTalentService.updateModelTalent(id, payload, files);
         res.status(200).json({
             status: 'SUCCESS UPDATE MODEL TALENT',
             data

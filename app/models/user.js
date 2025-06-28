@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.AdminPermissions, {
         foreignKey: 'userId',
         as: 'permissions',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       })
     }
   }

@@ -12,12 +12,15 @@ exports.getNews = async (offset, limit) => {
 };
 
 exports.getNewsById = async (id) => {
-    const news  = await News.findByPk(id);
-    return {
-        ...news.toJSON(),
-        createdAt: convertToIndonesiaTime(news.createdAt),
-        updatedAt: convertToIndonesiaTime(news.updatedAt),
-    };
+    return await News.findByPk(id, {
+        attributes: { exclude: ['createdBy', 'updatedBy'] },
+    });
+    // const news  = await News.findByPk(id);
+    // return {
+    //     ...news.toJSON(),
+    //     createdAt: convertToIndonesiaTime(news.createdAt),
+    //     updatedAt: convertToIndonesiaTime(news.updatedAt),
+    // };
 }
 
 exports.createNews = async (payload, idUser) => {

@@ -69,16 +69,12 @@ exports.updateUser = async (id, payload) => {
             throw new ApplicationError(`User with ID ${id} not found`, 404);
         }
         
-        const newPayload = Object.keys(getUser.dataValues).reduce((acc, key) => {
-            acc[key] = payload[key] !== undefined && payload[key] !== null ? payload[key] : getUser.dataValues[key];
-            return acc;
-        }, {});
-
-        console.log('newPayload', newPayload);
-
-        await userRepository.updateUser(id, newPayload);
-
-        return newPayload;
+        const updated = await getUser.update({
+            name: payload.name || getUser.name,
+            email: payload.email || getUser.email,
+        });
+        
+        return updated;
     } catch (error) {
         throw new ApplicationError(`Error at services user: ${error.message}`, 500);
     }

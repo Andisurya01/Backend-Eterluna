@@ -38,13 +38,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    profilePicture: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     talentId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'Talents',
         key: 'id'
-      }
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     }
   }, {
     sequelize,

@@ -27,7 +27,9 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id',
-        }
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       },
       updatedBy: {
         type: Sequelize.INTEGER,
@@ -35,7 +37,9 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id',
-        }
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

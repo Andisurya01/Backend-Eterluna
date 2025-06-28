@@ -13,10 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User, {
         foreignKey: 'createdBy',
         as: 'user',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
       this.belongsTo(models.User, {
         foreignKey: 'updatedBy',
         as: 'updatedByUser',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
       // define association here
     }

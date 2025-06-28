@@ -51,7 +51,7 @@ exports.bulkUpdateFaq = async (payload) => {
         const updatedData = [];
 
         for (const item of payload) {
-            const { id, title, body } = item;
+            const { id, answer, question } = item;
 
             if (!id) {
                 return res.status(400).json({ message: "Setiap item harus memiliki id." });
@@ -63,8 +63,8 @@ exports.bulkUpdateFaq = async (payload) => {
             }
 
             const updated = await faq.update({
-                title: title || faq.title,
-                body: body || faq.body,
+                answer: answer || faq.answer,
+                question: question || faq.question,
             });
             updatedData.push(updated);
         }

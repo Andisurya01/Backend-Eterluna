@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Staff.belongsToMany(models.Sosmed, { through: models.StaffSosmed , as: 'sosmeds' });
+      Staff.belongsToMany(models.Sosmed, { 
+        through: models.StaffSosmed , 
+        as: 'sosmeds',
+        onDelete: 'CASCADE',
+      });
       // define association here
     }
   }

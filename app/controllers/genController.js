@@ -66,6 +66,22 @@ exports.updateGen = async (req, res) => {
     }
 }
 
+exports.bulkUpdateGen = async (req, res) => {
+    try {
+        const payload = req.body;
+        const data = await genService.bulkUpdateGen(payload);
+        res.status(200).json({
+            status: 'SUCCESS BULK UPDATE GEN',
+            data
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            status: 'FAILED BULK UPDATE GEN',
+            message: error.message,
+        });
+    }
+}
+
 exports.deleteGen = async (req, res) => {
     try {
         const { id } = req.params;

@@ -8,11 +8,12 @@ module.exports = (sequelize, DataTypes) => {
       Talent.belongsTo(models.Gen, {
         foreignKey: 'genId',
         as: 'gen',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
       });
       Talent.belongsToMany(models.Sosmed, { 
         through: models.TalentSosmed, 
-        as: 'sosmeds' 
+        as: 'sosmeds',
+        onDelete: 'CASCADE'
       });
       Talent.hasMany(models.ModelTalent, {
         foreignKey: 'talentId',
@@ -75,6 +76,14 @@ module.exports = (sequelize, DataTypes) => {
     debut: {
       type: DataTypes.BOOLEAN,
       allowNull: false
+    },
+    badge: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    linkYT: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     // genId: {
     //   type: DataTypes.INTEGER,

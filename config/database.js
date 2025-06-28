@@ -11,13 +11,13 @@ const {
 
 module.exports = {
     "development": {
-        "username": DB_USERNAME,
-        "password": DB_PASSWORD,
-        "database": DB_NAME,
-        "host": DB_HOST,
-        "dialect": DB_DIALECT,
+        "username": "root",
+        "password": null,
+        "database": "eterluna",
+        "host": "127.0.0.1",
+        "dialect": "mysql",
         "dialectModule": require('mysql2'),
-        "port": Number(DB_PORT),
+        // "port": Number(DB_PORT),
     },
     "test": {
         "username": "root",
